@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eagles ClinicalAI</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Platform navigation">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">E</div>
+          <div>
+            <strong>Eagles ClinicalAI</strong>
+            <span>Clinical ML Studio</span>
+          </div>
+        </div>
+
+        <nav class="main-nav">
+          <a class="active" href="#learn">Learn</a>
+          <a href="#builder">Build</a>
+          <a href="#evaluate">Evaluate</a>
+          <a href="#explain">Explain</a>
+        </nav>
+
+        <div class="mentor-card">
+          <span class="eyebrow">Today</span>
+          <strong>Lesson 3: Predicting ICU readmission</strong>
+          <p>Complete model training and read the explanation report.</p>
+          <button class="icon-button" type="button" aria-label="Start lesson">
+            <span aria-hidden="true">▶</span>
+          </button>
+        </div>
+      </aside>
+
+      <main>
+        <section class="hero" id="learn">
+          <div class="hero-copy">
+            <p class="kicker">Clinical Decision Support • Powered by Machine Learning</p>
+            <h1>Eagles ClinicalAI</h1>
+            <p>
+              An interactive no-code platform where healthcare students and professionals learn how
+              to build, train, evaluate, and explain machine learning models across 20 medical
+              specialties.
+            </p>
+            <div class="hero-actions">
+              <a class="primary-action" href="#builder">Start training</a>
+              <a class="secondary-action" href="#explain">View explainability lab</a>
+            </div>
+          </div>
+
+          <div class="clinical-visual" aria-label="Clinical AI learning dashboard preview">
+            <canvas id="pulseCanvas" width="760" height="520"></canvas>
+            <div class="visual-panel diagnosis">
+              <span>Risk model</span>
+              <strong>ICU readmission</strong>
+              <em>AUROC 0.91</em>
+            </div>
+            <div class="visual-panel explain-card">
+              <span>Top signal</span>
+              <strong>Oxygen saturation trend</strong>
+              <em>+18% model impact</em>
+            </div>
+          </div>
+        </section>
+
+        <section class="workspace-band" id="builder">
+          <div class="section-heading">
+            <p class="kicker">Guided platform training</p>
+            <h2>Teach students the complete clinical AI workflow.</h2>
+          </div>
+
+          <div class="learning-grid">
+            <article class="lesson-panel">
+              <div class="panel-header">
+                <span>Step-by-step lesson</span>
+                <strong id="lessonTitle">Choose a specialty</strong>
+              </div>
+              <ol class="lesson-steps" id="lessonSteps"></ol>
+              <button class="wide-button" id="nextStep" type="button">Next step</button>
+            </article>
+
+            <article class="builder-panel">
+              <div class="panel-header">
+                <span>No-code model builder</span>
+                <strong>Training workspace</strong>
+              </div>
+
+              <label for="specialtySelect">Medical specialty</label>
+              <select id="specialtySelect">
+                <option>Cardiology</option>
+                <option>Emergency Medicine</option>
+                <option>Endocrinology</option>
+                <option>Neurology</option>
+                <option>Oncology</option>
+                <option>Pediatrics</option>
+                <option>Radiology</option>
+                <option>Surgery</option>
+              </select>
+
+              <div class="model-controls" aria-label="Model configuration">
+                <button class="chip active" type="button">Clean data</button>
+                <button class="chip" type="button">Select features</button>
+                <button class="chip" type="button">Train model</button>
+                <button class="chip" type="button">Explain result</button>
+              </div>
+
+              <div class="metric-row" id="evaluate">
+                <div>
+                  <span>Accuracy</span>
+                  <strong id="accuracyValue">94%</strong>
+                </div>
+                <div>
+                  <span>Recall</span>
+                  <strong id="recallValue">88%</strong>
+                </div>
+                <div>
+                  <span>Bias check</span>
+                  <strong>Pass</strong>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="explain-band" id="explain">
+          <div class="section-heading">
+            <p class="kicker">Explainable clinical decisions</p>
+            <h2>Students learn what the model sees, where it is uncertain, and when a human must decide.</h2>
+          </div>
+
+          <div class="explain-grid">
+            <article>
+              <span class="number">01</span>
+              <h3>Build clinical context</h3>
+              <p>Upload a training dataset, map patient variables, and define the clinical question.</p>
+            </article>
+            <article>
+              <span class="number">02</span>
+              <h3>Train responsibly</h3>
+              <p>Compare algorithms, split cohorts, check drift, and learn why validation matters.</p>
+            </article>
+            <article>
+              <span class="number">03</span>
+              <h3>Explain predictions</h3>
+              <p>Review feature importance, confidence, fairness warnings, and plain-language summaries.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
