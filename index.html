@@ -3,31 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eagles ClinicalAI</title>
+    <title>Health-AI</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="app-shell">
       <aside class="sidebar" aria-label="Platform navigation">
         <div class="brand">
-          <div class="brand-mark" aria-hidden="true">E</div>
+          <div class="brand-mark" aria-hidden="true">H</div>
           <div>
-            <strong>Eagles ClinicalAI</strong>
-            <span>Clinical ML Studio</span>
+            <strong>Health-AI</strong>
+            <span>AI literacy for clinicians</span>
           </div>
         </div>
 
         <nav class="main-nav">
           <a class="active" href="#learn">Learn</a>
-          <a href="#builder">Build</a>
-          <a href="#evaluate">Evaluate</a>
-          <a href="#explain">Explain</a>
+          <a href="#builder">Modules</a>
+          <a href="#evaluate">Risks</a>
+          <a href="#explain">Ethics</a>
+          <a href="#use-cases">Use cases</a>
+          <a href="#repository">Repository</a>
+          <a href="#browser-ai">Browser AI</a>
         </nav>
 
         <div class="mentor-card">
           <span class="eyebrow">Today</span>
-          <strong>Lesson 3: Predicting ICU readmission</strong>
-          <p>Complete model training and read the explanation report.</p>
+          <strong>Lesson 3: Why models make mistakes</strong>
+          <p>Study bias, validation, and safe clinical use before trusting an AI output.</p>
           <button class="icon-button" type="button" aria-label="Start lesson">
             <span aria-hidden="true">▶</span>
           </button>
@@ -37,45 +40,47 @@
       <main>
         <section class="hero" id="learn">
           <div class="hero-copy">
-            <p class="kicker">Clinical Decision Support • Powered by Machine Learning</p>
-            <h1>Eagles ClinicalAI</h1>
+            <p class="kicker">Health education for the AI era</p>
+            <h1>Health-AI</h1>
             <p>
-              An interactive no-code platform where healthcare students and professionals learn how
-              to build, train, evaluate, and explain machine learning models across 20 medical
-              specialties.
+              A foundational learning platform that helps doctors understand what sits behind
+              AI, machine learning, and deep learning systems before using them in clinical
+              decisions.
             </p>
             <div class="hero-actions">
-              <a class="primary-action" href="#builder">Start training</a>
-              <a class="secondary-action" href="#explain">View explainability lab</a>
+              <a class="primary-action" href="#builder">Start AI literacy</a>
+              <a class="secondary-action" href="#explain">Explore ethical use</a>
+              <a class="secondary-action" href="#repository">Open repository</a>
+              <a class="secondary-action" href="#browser-ai">Try browser AI</a>
             </div>
           </div>
 
-          <div class="clinical-visual" aria-label="Clinical AI learning dashboard preview">
+          <div class="clinical-visual" aria-label="Health-AI learning dashboard preview">
             <canvas id="pulseCanvas" width="760" height="520"></canvas>
             <div class="visual-panel diagnosis">
-              <span>Risk model</span>
-              <strong>ICU readmission</strong>
-              <em>AUROC 0.91</em>
+              <span>Module focus</span>
+              <strong>Model logic</strong>
+              <em>Data → training → prediction</em>
             </div>
             <div class="visual-panel explain-card">
-              <span>Top signal</span>
-              <strong>Oxygen saturation trend</strong>
-              <em>+18% model impact</em>
+              <span>Clinical caution</span>
+              <strong>AI output is not a diagnosis</strong>
+              <em>Human judgment remains central</em>
             </div>
           </div>
         </section>
 
         <section class="workspace-band" id="builder">
           <div class="section-heading">
-            <p class="kicker">Guided platform training</p>
-            <h2>Teach students the complete clinical AI workflow.</h2>
+            <p class="kicker">The gap Health-AI fills</p>
+            <h2>A structured learning space for understanding artificial intelligence in modern healthcare education.</h2>
           </div>
 
           <div class="learning-grid">
             <article class="lesson-panel">
               <div class="panel-header">
-                <span>Step-by-step lesson</span>
-                <strong id="lessonTitle">Choose a specialty</strong>
+                <span>Step-by-step foundation</span>
+                <strong id="lessonTitle">Choose a learning module</strong>
               </div>
               <ol class="lesson-steps" id="lessonSteps"></ol>
               <button class="wide-button" id="nextStep" type="button">Next step</button>
@@ -83,41 +88,41 @@
 
             <article class="builder-panel">
               <div class="panel-header">
-                <span>No-code model builder</span>
-                <strong>Training workspace</strong>
+                <span>Concept workspace</span>
+                <strong>Understand the system</strong>
               </div>
 
-              <label for="specialtySelect">Medical specialty</label>
+              <label for="specialtySelect">Learning module</label>
               <select id="specialtySelect">
-                <option>Cardiology</option>
-                <option>Emergency Medicine</option>
-                <option>Endocrinology</option>
-                <option>Neurology</option>
-                <option>Oncology</option>
-                <option>Pediatrics</option>
-                <option>Radiology</option>
-                <option>Surgery</option>
+                <option>AI Fundamentals</option>
+                <option>Machine Learning</option>
+                <option>Deep Learning</option>
+                <option>Clinical Data</option>
+                <option>Model Evaluation</option>
+                <option>Bias and Safety</option>
+                <option>Ethical Use</option>
+                <option>Clinical Deployment</option>
               </select>
 
-              <div class="model-controls" aria-label="Model configuration">
-                <button class="chip active" type="button">Clean data</button>
-                <button class="chip" type="button">Select features</button>
-                <button class="chip" type="button">Train model</button>
-                <button class="chip" type="button">Explain result</button>
+              <div class="model-controls" aria-label="Learning focus">
+                <button class="chip active" type="button">Data</button>
+                <button class="chip" type="button">Training</button>
+                <button class="chip" type="button">Validation</button>
+                <button class="chip" type="button">Ethics</button>
               </div>
 
               <div class="metric-row" id="evaluate">
                 <div>
-                  <span>Accuracy</span>
-                  <strong id="accuracyValue">94%</strong>
+                  <span>Learning depth</span>
+                  <strong id="accuracyValue">Core</strong>
                 </div>
                 <div>
-                  <span>Recall</span>
-                  <strong id="recallValue">88%</strong>
+                  <span>Clinical risk</span>
+                  <strong id="recallValue">High</strong>
                 </div>
                 <div>
-                  <span>Bias check</span>
-                  <strong>Pass</strong>
+                  <span>End goal</span>
+                  <strong>Safe use</strong>
                 </div>
               </div>
             </article>
@@ -126,25 +131,185 @@
 
         <section class="explain-band" id="explain">
           <div class="section-heading">
-            <p class="kicker">Explainable clinical decisions</p>
-            <h2>Students learn what the model sees, where it is uncertain, and when a human must decide.</h2>
+            <p class="kicker">Responsible AI in healthcare</p>
+            <h2>Participants build practical awareness of AI concepts, limitations, risks, and responsible use in healthcare settings.</h2>
           </div>
 
           <div class="explain-grid">
             <article>
               <span class="number">01</span>
-              <h3>Build clinical context</h3>
-              <p>Upload a training dataset, map patient variables, and define the clinical question.</p>
+              <h3>Understand the backend</h3>
+              <p>Learn the basic logic behind AI, ML, and DL: data, patterns, training, outputs, and limitations.</p>
             </article>
             <article>
               <span class="number">02</span>
-              <h3>Train responsibly</h3>
-              <p>Compare algorithms, split cohorts, check drift, and learn why validation matters.</p>
+              <h3>Recognize model risk</h3>
+              <p>See how bias, weak datasets, overfitting, drift, and poor validation can affect patient-facing tools.</p>
             </article>
             <article>
               <span class="number">03</span>
-              <h3>Explain predictions</h3>
-              <p>Review feature importance, confidence, fairness warnings, and plain-language summaries.</p>
+              <h3>Use AI ethically</h3>
+              <p>Practice when to rely on AI, when to question it, and how to keep clinical responsibility with humans.</p>
+            </article>
+          </div>
+        </section>
+
+
+        <section class="usecase-band" id="use-cases">
+          <div class="section-heading">
+            <p class="kicker">How doctors can use Health-AI</p>
+            <h2>Practical learning paths for clinical education, decision support awareness, and safe AI adoption.</h2>
+          </div>
+
+          <div class="usecase-grid">
+            <article class="usecase-card active" data-usecase="clinic">
+              <span>Clinical practice</span>
+              <h3>Evaluate AI outputs</h3>
+              <p>Use structured checklists to interpret AI suggestions, uncertainty, and warning signs before applying them in care.</p>
+            </article>
+            <article class="usecase-card" data-usecase="teaching">
+              <span>Teaching</span>
+              <h3>Build lecture pathways</h3>
+              <p>Create module-based learning plans with slides, readings, datasets, case studies, and quizzes.</p>
+            </article>
+            <article class="usecase-card" data-usecase="research">
+              <span>Research literacy</span>
+              <h3>Read AI papers better</h3>
+              <p>Understand datasets, endpoints, validation, bias, performance metrics, and limitations in published AI studies.</p>
+            </article>
+            <article class="usecase-card" data-usecase="governance">
+              <span>Governance</span>
+              <h3>Prepare safer adoption</h3>
+              <p>Review ethics, accountability, patient privacy, monitoring, and human oversight before introducing AI tools.</p>
+            </article>
+          </div>
+
+          <div class="workflow-panel">
+            <div>
+              <span id="workflowLabel">Clinical practice workflow</span>
+              <h3 id="workflowTitle">Evaluate AI outputs</h3>
+              <p id="workflowText">A guided pathway for reviewing model purpose, source data, validation, uncertainty, and safe clinical interpretation.</p>
+            </div>
+            <ol id="workflowSteps" class="workflow-steps"></ol>
+          </div>
+        </section>
+
+        <section class="repository-band" id="repository">
+          <div class="section-heading">
+            <p class="kicker">Lecture material repository</p>
+            <h2>Upload, organize, and share teaching materials for AI literacy in healthcare.</h2>
+          </div>
+
+          <div class="repository-grid">
+            <article class="upload-panel">
+              <div class="panel-header">
+                <span>Instructor tools</span>
+                <strong>Add lecture material</strong>
+              </div>
+
+              <form id="resourceForm" class="resource-form">
+                <label for="resourceTitle">Material title</label>
+                <input id="resourceTitle" type="text" placeholder="Example: Bias in clinical datasets" required />
+
+                <div class="form-row">
+                  <div>
+                    <label for="resourceModule">Module</label>
+                    <select id="resourceModule">
+                      <option>AI Fundamentals</option>
+                      <option>Machine Learning</option>
+                      <option>Deep Learning</option>
+                      <option>Clinical Data</option>
+                      <option>Model Evaluation</option>
+                      <option>Bias and Safety</option>
+                      <option>Ethical Use</option>
+                      <option>Clinical Deployment</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="resourceType">Type</label>
+                    <select id="resourceType">
+                      <option>Slide deck</option>
+                      <option>Reading</option>
+                      <option>Case study</option>
+                      <option>Dataset</option>
+                      <option>Video</option>
+                      <option>Quiz</option>
+                    </select>
+                  </div>
+                </div>
+
+                <label for="resourceDescription">Teaching note</label>
+                <textarea id="resourceDescription" placeholder="What should students learn from this material?" rows="4"></textarea>
+
+                <label for="resourceFile">File</label>
+                <label class="file-drop" for="resourceFile"><strong>Choose file</strong><span id="selectedFileName">No file selected</span></label>
+                <input id="resourceFile" class="hidden-file" type="file" />
+
+                <button class="wide-button" type="submit">Upload material</button>
+              </form>
+            </article>
+
+            <article class="library-panel">
+              <div class="panel-header library-header">
+                <div>
+                  <span>Student library</span>
+                  <strong>Course materials</strong>
+                </div>
+                <select id="repositoryFilter" aria-label="Filter materials">
+                  <option>All modules</option>
+                  <option>AI Fundamentals</option>
+                  <option>Machine Learning</option>
+                  <option>Deep Learning</option>
+                  <option>Clinical Data</option>
+                  <option>Model Evaluation</option>
+                  <option>Bias and Safety</option>
+                  <option>Ethical Use</option>
+                  <option>Clinical Deployment</option>
+                </select>
+              </div>
+
+              <div class="repository-stats" aria-label="Repository statistics">
+                <div><strong id="resourceCount">0</strong><span>materials</span></div>
+                <div><strong>8</strong><span>modules</span></div>
+                <div><strong>6</strong><span>formats</span></div>
+              </div>
+
+              <div class="resource-list" id="resourceList"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="browser-ai-band" id="browser-ai">
+          <div class="section-heading">
+            <p class="kicker">Health-AI learning assistant</p>
+            <h2>Ask focused questions about AI concepts, model risk, ethics, and course materials.</h2>
+          </div>
+
+          <div class="browser-ai-grid">
+            <article class="browser-chat-panel">
+              <div class="panel-header">
+                <div>
+                  <span>Guided support</span>
+                  <strong>Ask Health-AI</strong>
+                </div>
+                <em class="chat-status" id="browserAiStatus">Ready</em>
+              </div>
+
+              <form id="browserAiForm" class="assistant-form">
+                <label for="browserAiPrompt">Question or learning topic</label>
+                <textarea id="browserAiPrompt" rows="5" placeholder="Example: Explain bias in clinical AI for medical students."></textarea>
+                <button class="wide-button" type="submit">Get guidance</button>
+              </form>
+            </article>
+
+            <article class="browser-answer-panel">
+              <div class="panel-header">
+                <span>Assistant response</span>
+                <strong>Learning guidance</strong>
+              </div>
+              <div class="bot-response" id="browserAiResponse">
+                <p>Ask a question to receive focused educational guidance and related course materials.</p>
+              </div>
             </article>
           </div>
         </section>
