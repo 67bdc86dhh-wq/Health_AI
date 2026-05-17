@@ -1,20 +1,16 @@
 const specialtyData = {
-  "AI Fundamentals": { level: "Core", risk: "Medium", lesson: "What AI means in healthcare" },
-  "Machine Learning": { level: "Core", risk: "High", lesson: "How models learn from data" },
-  "Deep Learning": { level: "Advanced", risk: "High", lesson: "Why neural networks can be hard to interpret" },
-  "Clinical Data": { level: "Core", risk: "High", lesson: "How data quality shapes AI behavior" },
-  "Model Evaluation": { level: "Core", risk: "High", lesson: "Accuracy is not enough" },
-  "Bias and Safety": { level: "Essential", risk: "Critical", lesson: "Where unsafe outputs come from" },
-  "Ethical Use": { level: "Essential", risk: "Critical", lesson: "Keeping responsibility with clinicians" },
-  "Clinical Deployment": { level: "Advanced", risk: "Critical", lesson: "Using AI safely in real workflows" }
+  "GenAI Foundations": { level: "Foundation", risk: "Human oversight", lesson: "Understand how GenAI and LLMs work in healthcare education." },
+  "Prompting in Healthcare": { level: "Applied", risk: "Privacy", lesson: "Write safer prompts and choose appropriate healthcare use cases." },
+  "Model Evaluation": { level: "Applied", risk: "Reliability", lesson: "Evaluate and compare GenAI outputs before trusting them." },
+  "Explainability and Bias": { level: "Advanced", risk: "Fairness", lesson: "Recognise bias, explainability limits, and communication risks." }
 };
 
 const steps = [
-  "Learn the difference between AI, machine learning, and deep learning.",
-  "Trace how clinical data becomes model input and prediction output.",
-  "Explore what affects model performance, bias, and reliability.",
-  "Read validation results, uncertainty, and common failure modes.",
-  "Apply ethical rules before using AI in a clinical decision."
+  "Module 1: Learn how GenAI and LLMs generate text, summaries, explanations, and recommendations.",
+  "Module 2: Practice safe prompting for healthcare education without exposing patient data.",
+  "Module 3: Compare model outputs for factuality, usefulness, hallucination, and safety.",
+  "Module 4: Review explainability, algorithmic bias, fairness, transparency, and governance.",
+  "Final activity: apply the Health-AI checklist to a healthcare teaching or clinical-support scenario."
 ];
 
 const specialtySelect = document.querySelector("#specialtySelect");
@@ -139,27 +135,67 @@ drawVisual();
 
 const defaultResources = [
   {
-    title: "AI, ML, and DL: core definitions",
-    module: "AI Fundamentals",
-    type: "Slide deck",
-    description: "Introduces the difference between rules-based systems, machine learning, and deep learning for clinical learners.",
-    file: "health-ai-foundations.pdf",
+    title: "GenAI & LLMs: how they work",
+    category: "1. Foundations",
+    module: "GenAI and LLMs",
+    level: "Foundation",
+    type: "Learning module",
+    focus: "Model logic, tokens, training, outputs, limitations",
+    appSteps: "Module 1",
+    ethics: "Human oversight, privacy, transparency",
+    description: "Learn what generative AI and large language models are, how they generate outputs, why they can be useful in healthcare education, and why they can also be wrong or unsafe.",
+    objectives: ["Explain AI, GenAI, LLMs, tokens, prompts, model training, and outputs", "Identify common healthcare uses: education, summarisation, documentation support, research support, and patient communication drafts", "Recognise limits such as hallucination, outdated knowledge, missing context, and overconfidence"],
+    activities: ["Map one clinical education task to a GenAI workflow", "Compare a safe and unsafe model response", "Discuss where human review is required"],
+    assessment: "Short reflection: explain to a colleague why an LLM answer is not clinical evidence.",
+    file: "health-ai-genai-foundations.pdf",
     url: "#"
   },
   {
-    title: "Bias in clinical datasets",
-    module: "Bias and Safety",
-    type: "Case study",
-    description: "A guided discussion on how missingness, representation, and historical practice patterns affect model behavior.",
-    file: "bias-case-study.docx",
+    title: "GenAI: prompting and use in healthcare context",
+    category: "2. Prompting and healthcare use",
+    module: "GenAI and LLMs",
+    level: "Applied",
+    type: "Learning module",
+    focus: "Prompt structure, clinical context, boundaries, safe tasks",
+    appSteps: "Module 2",
+    ethics: "Patient confidentiality, consent, professional responsibility",
+    description: "Practice writing clear prompts for healthcare education while avoiding patient-identifiable data, unsafe instructions, and outputs that replace professional judgement.",
+    objectives: ["Write prompts with role, task, context, constraints, and output format", "Separate low-risk educational uses from high-risk clinical decision uses", "Apply privacy-safe prompting rules when handling patient-related scenarios"],
+    activities: ["Rewrite a vague prompt into a structured healthcare prompt", "Classify example use cases by risk", "Create a prompt checklist for students or clinicians"],
+    assessment: "Prompt review: improve a weak prompt and explain what risk was reduced.",
+    file: "health-ai-genai-prompting-healthcare.pdf",
     url: "#"
   },
   {
-    title: "Reading model validation tables",
-    module: "Model Evaluation",
-    type: "Reading",
-    description: "Explains accuracy, sensitivity, specificity, AUC, calibration, and why no single metric is enough.",
-    file: "validation-guide.pdf",
+    title: "GenAI: evaluating and comparing models",
+    category: "3. Evaluation and comparison",
+    module: "GenAI and LLMs",
+    level: "Applied",
+    type: "Learning module",
+    focus: "Accuracy, hallucination, usefulness, safety, model comparison",
+    appSteps: "Module 3",
+    ethics: "Reliability, accountability, non-maleficence",
+    description: "Learn how to compare GenAI tools and outputs using accuracy checks, source review, consistency checks, safety criteria, and human evaluation rather than trusting fluent text.",
+    objectives: ["Evaluate outputs for factuality, relevance, completeness, uncertainty, and clinical safety", "Compare two model responses using a structured rubric", "Recognise hallucination, citation failure, hidden bias, and unsupported clinical claims"],
+    activities: ["Score two AI answers with a rubric", "Find missing safety warnings in a generated response", "Build a model comparison table for a teaching scenario"],
+    assessment: "Mini-audit: document why one AI response is safer than another.",
+    file: "health-ai-genai-evaluation.pdf",
+    url: "#"
+  },
+  {
+    title: "GenAI: explainability and algorithmic bias",
+    category: "4. Explainability and bias",
+    module: "GenAI and LLMs",
+    level: "Advanced",
+    type: "Learning module",
+    focus: "Bias, fairness, explainability, communication, governance",
+    appSteps: "Module 4",
+    ethics: "Fairness, transparency, equity, patient communication",
+    description: "Study how bias can appear in GenAI systems, why LLM explanations can sound convincing without being reliable, and how health professionals should communicate uncertainty and limitations.",
+    objectives: ["Identify sources of bias in data, prompts, model design, deployment, and user interpretation", "Explain why GenAI explanations need verification", "Apply fairness and transparency checks before using AI outputs in education or practice"],
+    activities: ["Review a biased AI-generated patient explanation", "Create a fairness checklist for a GenAI healthcare use case", "Discuss how to explain AI limitations to patients and families"],
+    assessment: "Case discussion: identify bias risks and propose mitigation steps.",
+    file: "health-ai-genai-bias-explainability.pdf",
     url: "#"
   }
 ];
@@ -170,7 +206,9 @@ const repositoryFilter = document.querySelector("#repositoryFilter");
 const resourceCount = document.querySelector("#resourceCount");
 const resourceFile = document.querySelector("#resourceFile");
 const selectedFileName = document.querySelector("#selectedFileName");
-const resourceKey = "healthAiResources";
+const modulePageTabs = document.querySelector("#modulePageTabs");
+const modulePagePanel = document.querySelector("#modulePagePanel");
+const resourceKey = "healthAiGenAiLearningModulesV1";
 
 function loadResources() {
   const saved = window.localStorage.getItem(resourceKey);
@@ -195,6 +233,10 @@ function escapeHtml(value) {
 
 function saveResources() {
   window.localStorage.setItem(resourceKey, JSON.stringify(resources));
+}
+
+function moduleSlug(value) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
 function readFileAsDataUrl(file) {
@@ -229,6 +271,23 @@ function openResource(resource) {
     link.click();
     link.remove();
   }
+}
+
+function getTeachingCategory(resource) {
+  if (resource.category) return resource.category;
+  const title = (resource.title || "").toLowerCase();
+  if (title.includes("prompt")) return "2. Prompting and healthcare use";
+  if (title.includes("evaluat") || title.includes("compar")) return "3. Evaluation and comparison";
+  if (title.includes("explain") || title.includes("bias") || title.includes("fair")) return "4. Explainability and bias";
+  if (title.includes("data") || title.includes("clean")) return "2. Data preparation";
+  return "1. Foundations";
+}
+
+function getModuleSummary(moduleName, moduleResources) {
+  const institutions = [...new Set(moduleResources.map((resource) => resource.institution).filter(Boolean))].join(", ");
+  const levels = [...new Set(moduleResources.map((resource) => resource.level).filter(Boolean))].join(", ");
+  const modes = [...new Set(moduleResources.map((resource) => resource.type).filter(Boolean))].join(" / ");
+  return [institutions && "Institutions: " + institutions, levels && "Levels: " + levels, modes && "Delivery: " + modes].filter(Boolean).join(" | ");
 }
 
 function createResourceCard(resource) {
@@ -268,16 +327,108 @@ function createResourceCard(resource) {
   removeButton.textContent = "Remove";
 
   meta.append(module, type);
+  [resource.level, resource.institution, resource.deadline, resource.appSteps].filter(Boolean).forEach((value) => {
+    const item = document.createElement("span");
+    item.textContent = value;
+    meta.appendChild(item);
+  });
   content.append(title, meta);
   header.append(content, fileButton);
   actions.append(openButton, removeButton);
-  card.append(header, description, actions);
+  if (resource.focus || resource.ethics) {
+    const details = document.createElement("p");
+    details.className = "resource-details";
+    details.textContent = [resource.focus && "Focus: " + resource.focus, resource.ethics && "Ethics: " + resource.ethics].filter(Boolean).join(" | ");
+    card.append(header, description, details);
+  } else {
+    card.append(header, description);
+  }
+
+  const learningBody = document.createElement("div");
+  learningBody.className = "learning-module-body is-hidden";
+  [
+    ["Learning outcomes", resource.objectives],
+    ["Teaching activities", resource.activities],
+    ["Assessment", resource.assessment ? [resource.assessment] : []]
+  ].forEach(([heading, items]) => {
+    if (!items || !items.length) return;
+    const group = document.createElement("div");
+    const groupTitle = document.createElement("strong");
+    const list = document.createElement("ul");
+    groupTitle.textContent = heading;
+    items.forEach((value) => {
+      const item = document.createElement("li");
+      item.textContent = value;
+      list.appendChild(item);
+    });
+    group.append(groupTitle, list);
+    learningBody.appendChild(group);
+  });
+  const toggleButton = document.createElement("button");
+  toggleButton.type = "button";
+  toggleButton.dataset.toggleModuleIndex = String(originalIndex);
+  toggleButton.textContent = "Open learning module";
+  actions.prepend(toggleButton);
+  card.append(learningBody, actions);
   return card;
+}
+
+function createModuleList(title, items) {
+  if (!items || !items.length) return "";
+  return `
+    <div class="module-page-list">
+      <strong>${escapeHtml(title)}</strong>
+      <ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+    </div>
+  `;
+}
+
+function renderModulePage(resource) {
+  if (!modulePagePanel || !resource) return;
+  const relatedMaterials = resources.filter((item) => item.category === resource.category && item !== resource);
+  modulePagePanel.innerHTML = `
+    <div class="module-page-hero">
+      <span>${escapeHtml(resource.appSteps || "Learning module")}</span>
+      <h3>${escapeHtml(resource.title)}</h3>
+      <p>${escapeHtml(resource.description || "")}</p>
+    </div>
+    <div class="module-page-meta">
+      <span>${escapeHtml(resource.level || "Module")}</span>
+      <span>${escapeHtml(resource.focus || "Learning focus")}</span>
+      <span>${escapeHtml(resource.ethics || "Ethics focus")}</span>
+    </div>
+    <div class="module-page-grid">
+      ${createModuleList("Learning outcomes", resource.objectives)}
+      ${createModuleList("Teaching activities", resource.activities)}
+      ${createModuleList("Assessment", resource.assessment ? [resource.assessment] : [])}
+      ${createModuleList("Related uploaded materials", relatedMaterials.map((item) => item.title))}
+    </div>
+  `;
+}
+
+function renderModulePages() {
+  if (!modulePageTabs || !modulePagePanel) return;
+  const modules = defaultResources;
+  modulePageTabs.innerHTML = "";
+  modules.forEach((resource, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.modulePage = moduleSlug(resource.title);
+    button.textContent = resource.title;
+    button.classList.toggle("active", index === 0);
+    button.addEventListener("click", () => {
+      modulePageTabs.querySelectorAll("button").forEach((item) => item.classList.remove("active"));
+      button.classList.add("active");
+      renderModulePage(resource);
+    });
+    modulePageTabs.appendChild(button);
+  });
+  renderModulePage(modules[0]);
 }
 
 function renderResources() {
   const filter = repositoryFilter.value;
-  const visibleResources = filter === "All modules" ? resources : resources.filter((item) => item.module === filter);
+  const visibleResources = filter.startsWith("All") ? resources : resources.filter((item) => item.module === filter || item.category === filter);
   resourceList.innerHTML = "";
   resourceCount.textContent = resources.length;
   renderDatabaseStats();
@@ -285,7 +436,7 @@ function renderResources() {
   if (!visibleResources.length) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
-    empty.textContent = "No materials in this module yet.";
+    empty.textContent = "No teaching modules in this category yet.";
     resourceList.appendChild(empty);
     return;
   }
@@ -294,19 +445,43 @@ function renderResources() {
   modules.forEach((moduleName) => {
     const moduleSection = document.createElement("section");
     const moduleHeader = document.createElement("div");
+    const moduleHeading = document.createElement("div");
     const moduleTitle = document.createElement("h3");
+    const moduleSummary = document.createElement("p");
     const moduleCount = document.createElement("span");
     const moduleItems = document.createElement("div");
     const moduleResources = visibleResources.filter((resource) => resource.module === moduleName);
+    const categories = [...new Set(moduleResources.map(getTeachingCategory))].sort();
 
-    moduleSection.className = "resource-module";
+    moduleSection.className = "resource-module teaching-module";
     moduleHeader.className = "resource-module-header";
+    moduleHeading.className = "module-heading";
     moduleItems.className = "resource-module-items";
     moduleTitle.textContent = moduleName;
-    moduleCount.textContent = moduleResources.length + (moduleResources.length === 1 ? " material" : " materials");
+    moduleSummary.textContent = getModuleSummary(moduleName, moduleResources);
+    moduleCount.textContent = moduleResources.length + (moduleResources.length === 1 ? " session" : " sessions");
 
-    moduleHeader.append(moduleTitle, moduleCount);
-    moduleResources.forEach((resource) => moduleItems.appendChild(createResourceCard(resource)));
+    moduleHeading.append(moduleTitle, moduleSummary);
+    moduleHeader.append(moduleHeading, moduleCount);
+    categories.forEach((categoryName) => {
+      const categoryBlock = document.createElement("section");
+      const categoryHeader = document.createElement("div");
+      const categoryTitle = document.createElement("h4");
+      const categoryCount = document.createElement("span");
+      const categoryItems = document.createElement("div");
+      const categoryResources = moduleResources.filter((resource) => getTeachingCategory(resource) === categoryName);
+
+      categoryBlock.className = "teaching-category";
+      categoryHeader.className = "teaching-category-header";
+      categoryItems.className = "teaching-category-items";
+      categoryTitle.textContent = categoryName.replace(/^\d+\.\s*/, "");
+      categoryCount.textContent = categoryResources.length + (categoryResources.length === 1 ? " session" : " sessions");
+
+      categoryHeader.append(categoryTitle, categoryCount);
+      categoryResources.forEach((resource) => categoryItems.appendChild(createResourceCard(resource)));
+      categoryBlock.append(categoryHeader, categoryItems);
+      moduleItems.appendChild(categoryBlock);
+    });
     moduleSection.append(moduleHeader, moduleItems);
     resourceList.appendChild(moduleSection);
   });
@@ -323,9 +498,10 @@ resourceForm.addEventListener("submit", async (event) => {
   try {
     const resource = {
       title: document.querySelector("#resourceTitle").value.trim(),
-      module: document.querySelector("#resourceModule").value,
+      module: "GenAI and LLMs",
       type: document.querySelector("#resourceType").value,
       description: document.querySelector("#resourceDescription").value.trim(),
+      category: document.querySelector("#resourceModule").value,
       file: file?.name || "Uploaded material",
       url: await readFileAsDataUrl(file),
       uploadedAt: new Date().toLocaleString()
@@ -344,6 +520,17 @@ resourceForm.addEventListener("submit", async (event) => {
 });
 
 resourceList.addEventListener("click", (event) => {
+  const toggleButton = event.target.closest("button[data-toggle-module-index]");
+  if (toggleButton) {
+    const card = toggleButton.closest(".resource-card");
+    const body = card?.querySelector(".learning-module-body");
+    if (body) {
+      body.classList.toggle("is-hidden");
+      toggleButton.textContent = body.classList.contains("is-hidden") ? "Open learning module" : "Close learning module";
+    }
+    return;
+  }
+
   const openButton = event.target.closest("button[data-open-resource-index]");
   if (openButton) {
     openResource(resources[Number(openButton.dataset.openResourceIndex)]);
@@ -362,32 +549,33 @@ resourceFile.addEventListener("change", () => {
 });
 
 repositoryFilter.addEventListener("change", renderResources);
+renderModulePages();
 
 
 const workflowData = {
-  clinic: {
-    label: "Clinical practice workflow",
-    title: "Evaluate AI outputs",
-    text: "A guided pathway for reviewing model purpose, source data, validation, uncertainty, and safe clinical interpretation.",
-    steps: ["Identify the tool's intended clinical use", "Check what data trained the model", "Review validation and performance metrics", "Look for bias, uncertainty, and missing context", "Document human review before action"]
+  foundations: {
+    label: "Module 1",
+    title: "GenAI & LLMs: how they work",
+    text: "A foundation module on LLMs, tokens, prompts, generated outputs, hallucination, uncertainty, and human oversight in healthcare education.",
+    steps: ["Define GenAI and LLMs", "Explain tokens, prompts, and outputs", "Identify common healthcare education uses", "Recognise hallucination and missing context", "Decide where human review is required"]
   },
-  teaching: {
-    label: "Teaching workflow",
-    title: "Build lecture pathways",
-    text: "A course-building flow for turning AI literacy content into structured sessions and practical classroom activities.",
-    steps: ["Choose a module topic", "Attach slides, readings, datasets, and cases", "Add a discussion question", "Assign a short quiz", "Review student understanding"]
+  genai: {
+    label: "Module 2",
+    title: "GenAI prompting and healthcare use",
+    text: "An applied module for writing safer healthcare prompts while respecting patient privacy, consent, clinical boundaries, and professional responsibility.",
+    steps: ["Use role, task, context, constraints, and format", "Avoid patient-identifiable data", "Match prompts to low-risk education tasks", "Review generated outputs before use", "Document prompt limitations"]
   },
-  research: {
-    label: "Research literacy workflow",
-    title: "Read AI papers better",
-    text: "A review pathway for interpreting AI publications and separating strong evidence from weak claims.",
-    steps: ["Define the clinical endpoint", "Inspect dataset size and representation", "Compare internal and external validation", "Review calibration and subgroup performance", "Summarize limitations before adoption"]
+  ml: {
+    label: "Module 3",
+    title: "GenAI evaluating and comparing models",
+    text: "A practical evaluation module for comparing GenAI outputs using factuality, usefulness, completeness, uncertainty, hallucination, and safety criteria.",
+    steps: ["Check factual accuracy", "Look for unsupported clinical claims", "Compare two outputs with a rubric", "Assess uncertainty and missing warnings", "Select the safer response"]
   },
-  governance: {
-    label: "Governance workflow",
-    title: "Prepare safer adoption",
-    text: "A checklist for privacy, accountability, monitoring, and operational readiness before clinical AI use.",
-    steps: ["Confirm privacy and consent requirements", "Assign clinical accountability", "Plan monitoring after deployment", "Create escalation rules", "Schedule periodic model review"]
+  ethics: {
+    label: "Module 4",
+    title: "GenAI explainability and algorithmic bias",
+    text: "An advanced module on bias sources, fairness, explainability limits, transparency, governance, and communicating AI limitations to patients and families.",
+    steps: ["Identify bias sources", "Review explainability limits", "Apply fairness checks", "Communicate uncertainty", "Plan mitigation and governance steps"]
   }
 };
 
@@ -414,7 +602,7 @@ function renderWorkflow(key) {
 usecaseCards.forEach((card) => {
   card.addEventListener("click", () => renderWorkflow(card.dataset.usecase));
 });
-renderWorkflow("clinic");
+renderWorkflow("foundations");
 
 const browserAiForm = document.querySelector("#browserAiForm");
 const browserAiPrompt = document.querySelector("#browserAiPrompt");
@@ -423,29 +611,24 @@ const browserAiStatus = document.querySelector("#browserAiStatus");
 
 const browserKnowledge = [
   {
-    title: "Bias in clinical AI",
-    keywords: ["bias", "fairness", "dataset", "representation"],
-    answer: "Bias can appear when training data does not represent the patient population, labels reflect historical practice patterns, or model performance is not checked across subgroups. Doctors should ask who was represented, who was missing, and how the model was validated."
+    title: "GenAI and LLM foundations",
+    keywords: ["genai", "llm", "tokens", "training", "hallucination", "foundation"],
+    answer: "GenAI and LLMs generate text by predicting likely language patterns from prompts and learned representations. In healthcare education, they can support drafting, summarising, tutoring, and simulation, but their outputs need human review because they can hallucinate, omit context, or sound certain when they are wrong."
   },
   {
-    title: "Model evaluation",
-    keywords: ["evaluation", "accuracy", "auc", "sensitivity", "specificity", "calibration", "metrics"],
-    answer: "Model evaluation should include sensitivity, specificity, AUC, calibration, subgroup performance, and clinical consequences of false positives and false negatives. Accuracy alone is not enough for healthcare use."
+    title: "Prompting in healthcare",
+    keywords: ["prompt", "prompting", "privacy", "patient", "context", "safe"],
+    answer: "A safer healthcare prompt states the role, task, context, constraints, and output format. It should avoid identifiable patient data and should be used for education or support, not as a replacement for clinical judgement."
   },
   {
-    title: "Data quality",
-    keywords: ["data", "quality", "missing", "training", "label"],
-    answer: "AI model behavior depends on data quality, missing values, labeling choices, measurement consistency, and whether the training data matches the real clinical setting."
+    title: "Evaluating GenAI outputs",
+    keywords: ["evaluate", "evaluation", "compare", "factual", "hallucination", "rubric", "safety"],
+    answer: "Evaluate GenAI outputs for factuality, relevance, completeness, uncertainty, missing safety warnings, unsupported clinical claims, and usefulness. Comparing outputs with a rubric is safer than trusting fluent wording."
   },
   {
-    title: "Ethical use",
-    keywords: ["ethics", "privacy", "responsibility", "patient", "consent", "safe"],
-    answer: "Ethical use of AI in healthcare requires privacy protection, transparency, human oversight, clear accountability, and awareness that AI supports clinical reasoning rather than replacing it."
-  },
-  {
-    title: "Deep learning basics",
-    keywords: ["deep", "learning", "neural", "black box", "explain"],
-    answer: "Deep learning models learn complex patterns through layered neural networks. They can be powerful, but their reasoning may be difficult to interpret, so explanation, validation, and human review are important."
+    title: "Explainability and algorithmic bias",
+    keywords: ["bias", "fairness", "explainability", "transparent", "governance", "equity"],
+    answer: "Bias can enter through training data, prompt wording, deployment context, and user interpretation. GenAI explanations can be persuasive without being reliable, so fairness checks, transparency, and governance are needed."
   }
 ];
 

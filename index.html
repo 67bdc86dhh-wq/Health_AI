@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Health-AI</title>
-    <link rel="stylesheet" href="styles.css?v=20260517" />
+    <link rel="stylesheet" href="styles.css?v=20260517-healthai-multipage" />
   </head>
   <body>
     <section class="login-screen" id="loginScreen" aria-label="Health-AI sign in">
@@ -13,14 +13,14 @@
           <div class="brand-mark" aria-hidden="true">H</div>
           <div>
             <strong>Health-AI</strong>
-            <span>Secure learning workspace</span>
+            <span>GenAI learning workspace</span>
           </div>
         </div>
 
         <div>
           <p class="kicker">Platform access</p>
           <h1 id="authTitle">Sign in</h1>
-          <p class="login-copy">Access AI literacy modules, lecture materials, doctor guidelines, and the Health-AI learning assistant.</p>
+          <p class="login-copy">Access GenAI learning modules, healthcare prompting practice, model evaluation, bias review, and the Health-AI assistant.</p>
         </div>
 
         <div class="auth-tabs" role="tablist" aria-label="Authentication mode">
@@ -72,18 +72,19 @@
           <div class="brand-mark" aria-hidden="true">H</div>
           <div>
             <strong>Health-AI</strong>
-            <span>AI literacy for clinicians</span>
+            <span>GenAI for healthcare curriculum</span>
           </div>
         </div>
 
         <nav class="main-nav">
-          <a class="active" href="#learn">Learn</a>
-          <a href="#builder">Modules</a>
-          <a href="#evaluate">Risks</a>
-          <a href="#explain">Ethics</a>
-          <a href="#use-cases">Use cases</a>
-          <a href="#repository">Repository</a>
-          <a href="#browser-ai">Browser AI</a>
+          <a class="active" href="index.html">Home</a>
+          <a href="modules.html">Modules</a>
+          <a href="module-genai-foundations.html">Foundations</a>
+          <a href="module-prompting-healthcare.html">Prompting</a>
+          <a href="module-evaluation.html">Evaluation</a>
+          <a href="module-bias-explainability.html">Bias</a>
+          <a href="materials.html">Materials</a>
+          <a href="#browser-ai">Assistant</a>
           <a href="#users" id="usersNavLink" class="admin-only">Users</a>
         </nav>
 
@@ -96,8 +97,8 @@
 
         <div class="mentor-card">
           <span class="eyebrow">Today</span>
-          <strong>Lesson 3: Why models make mistakes</strong>
-          <p>Study bias, validation, and safe clinical use before trusting an AI output.</p>
+          <strong>7 July delivery plan</strong>
+          <p>Review GenAI modules, responsible use, evaluation practice, and learning materials.</p>
           <button class="icon-button" type="button" aria-label="Start lesson">
             <span aria-hidden="true">▶</span>
           </button>
@@ -107,18 +108,16 @@
       <main>
         <section class="hero" id="learn">
           <div class="hero-copy">
-            <p class="kicker">Health education for the AI era</p>
+            <p class="kicker">GenAI health education platform</p>
             <h1>Health-AI</h1>
             <p>
-              A foundational learning platform that helps doctors understand what sits behind
-              AI, machine learning, and deep learning systems before using them in clinical
-              decisions.
+              A focused Health-AI platform for learning how GenAI and LLMs work, how to prompt safely, how to evaluate outputs, and how to recognise bias.
             </p>
             <div class="hero-actions">
-              <a class="primary-action" href="#builder">Start AI literacy</a>
-              <a class="secondary-action" href="#explain">Explore ethical use</a>
-              <a class="secondary-action" href="#repository">Open repository</a>
-              <a class="secondary-action" href="#browser-ai">Try browser AI</a>
+              <a class="primary-action" href="modules.html">Start learning modules</a>
+              <a class="secondary-action" href="module-bias-explainability.html">Open bias module</a>
+              <a class="secondary-action" href="materials.html">Open materials</a>
+              <a class="secondary-action" href="#browser-ai">Ask Health-AI</a>
             </div>
           </div>
 
@@ -126,27 +125,27 @@
             <canvas id="pulseCanvas" width="760" height="520"></canvas>
             <div class="visual-panel diagnosis">
               <span>Module focus</span>
-              <strong>Model logic</strong>
-              <em>Data → training → prediction</em>
+              <strong>GenAI learning path</strong>
+              <em>How it works → prompting → evaluation → bias</em>
             </div>
             <div class="visual-panel explain-card">
-              <span>Clinical caution</span>
-              <strong>AI output is not a diagnosis</strong>
-              <em>Human judgment remains central</em>
+              <span>Learning mode</span>
+              <strong>Modular</strong>
+              <em>Read, practice, evaluate, discuss</em>
             </div>
           </div>
         </section>
 
         <section class="workspace-band" id="builder">
           <div class="section-heading">
-            <p class="kicker">The gap Health-AI fills</p>
-            <h2>A structured learning space for understanding artificial intelligence in modern healthcare education.</h2>
+            <p class="kicker">Health-AI module map</p>
+            <h2>A structured learning space for GenAI foundations, healthcare prompting, model evaluation, explainability, and algorithmic bias.</h2>
           </div>
 
           <div class="learning-grid">
             <article class="lesson-panel">
               <div class="panel-header">
-                <span>Step-by-step foundation</span>
+                <span>Learning sequence</span>
                 <strong id="lessonTitle">Choose a learning module</strong>
               </div>
               <ol class="lesson-steps" id="lessonSteps"></ol>
@@ -155,40 +154,36 @@
 
             <article class="builder-panel">
               <div class="panel-header">
-                <span>Concept workspace</span>
-                <strong>Understand the system</strong>
+                <span>Module workspace</span>
+                <strong>Learning focus</strong>
               </div>
 
               <label for="specialtySelect">Learning module</label>
               <select id="specialtySelect">
-                <option>AI Fundamentals</option>
-                <option>Machine Learning</option>
-                <option>Deep Learning</option>
-                <option>Clinical Data</option>
+                <option>GenAI Foundations</option>
+                <option>Prompting in Healthcare</option>
                 <option>Model Evaluation</option>
-                <option>Bias and Safety</option>
-                <option>Ethical Use</option>
-                <option>Clinical Deployment</option>
+                <option>Explainability and Bias</option>
               </select>
 
               <div class="model-controls" aria-label="Learning focus">
-                <button class="chip active" type="button">Data</button>
-                <button class="chip" type="button">Training</button>
-                <button class="chip" type="button">Validation</button>
-                <button class="chip" type="button">Ethics</button>
+                <button class="chip active" type="button">How it works</button>
+                <button class="chip" type="button">Prompting</button>
+                <button class="chip" type="button">Evaluation</button>
+                <button class="chip" type="button">Bias</button>
               </div>
 
               <div class="metric-row" id="evaluate">
                 <div>
-                  <span>Learning depth</span>
+                  <span>Curriculum level</span>
                   <strong id="accuracyValue">Core</strong>
                 </div>
                 <div>
-                  <span>Clinical risk</span>
+                  <span>Ethics focus</span>
                   <strong id="recallValue">High</strong>
                 </div>
                 <div>
-                  <span>End goal</span>
+                  <span>Goal</span>
                   <strong>Safe use</strong>
                 </div>
               </div>
@@ -198,25 +193,25 @@
 
         <section class="explain-band" id="explain">
           <div class="section-heading">
-            <p class="kicker">Responsible AI in healthcare</p>
-            <h2>Participants build practical awareness of AI concepts, limitations, risks, and responsible use in healthcare settings.</h2>
+            <p class="kicker">Responsible GenAI in healthcare</p>
+            <h2>Participants learn how GenAI works, where it can fail, how to evaluate outputs, and how to use it within ethical clinical boundaries.</h2>
           </div>
 
           <div class="explain-grid">
             <article>
               <span class="number">01</span>
-              <h3>Understand the backend</h3>
-              <p>Learn the basic logic behind AI, ML, and DL: data, patterns, training, outputs, and limitations.</p>
+              <h3>Deliver the core tracks</h3>
+              <p>Understand LLMs, tokens, prompts, generated outputs, limitations, and why AI text must be reviewed.</p>
             </article>
             <article>
               <span class="number">02</span>
-              <h3>Recognize model risk</h3>
-              <p>See how bias, weak datasets, overfitting, drift, and poor validation can affect patient-facing tools.</p>
+              <h3>Practice safe prompting</h3>
+              <p>Use structured prompts, avoid patient-identifiable data, and separate education support from clinical decision making.</p>
             </article>
             <article>
               <span class="number">03</span>
-              <h3>Use AI ethically</h3>
-              <p>Practice when to rely on AI, when to question it, and how to keep clinical responsibility with humans.</p>
+              <h3>Teach responsible use</h3>
+              <p>Evaluate hallucination, reliability, bias, explainability, transparency, privacy, and human oversight.</p>
             </article>
           </div>
         </section>
@@ -224,30 +219,30 @@
 
         <section class="usecase-band" id="use-cases">
           <div class="section-heading">
-            <p class="kicker">How doctors can use Health-AI</p>
-            <h2>Practical learning paths for clinical education, decision support awareness, and safe AI adoption.</h2>
+            <p class="kicker">Clickable learning modules</p>
+            <h2>Four focused GenAI modules for health professionals: foundations, prompting, evaluation, and bias.</h2>
           </div>
 
           <div class="usecase-grid">
-            <article class="usecase-card active" data-usecase="clinic">
-              <span>Clinical practice</span>
-              <h3>Evaluate AI outputs</h3>
-              <p>Use structured checklists to interpret AI suggestions, uncertainty, and warning signs before applying them in care.</p>
+            <article class="usecase-card active" data-usecase="foundations">
+              <span>Module 1</span>
+              <h3>How GenAI works</h3>
+              <p>LLMs, tokens, training, generated outputs, hallucination, and human oversight.</p>
             </article>
-            <article class="usecase-card" data-usecase="teaching">
-              <span>Teaching</span>
-              <h3>Build lecture pathways</h3>
-              <p>Create module-based learning plans with slides, readings, datasets, case studies, and quizzes.</p>
+            <article class="usecase-card" data-usecase="genai">
+              <span>Module 2</span>
+              <h3>Prompting in healthcare</h3>
+              <p>Prompt structure, healthcare context, safe boundaries, privacy, and professional responsibility.</p>
             </article>
-            <article class="usecase-card" data-usecase="research">
-              <span>Research literacy</span>
-              <h3>Read AI papers better</h3>
-              <p>Understand datasets, endpoints, validation, bias, performance metrics, and limitations in published AI studies.</p>
+            <article class="usecase-card" data-usecase="ml">
+              <span>Module 3</span>
+              <h3>Evaluate models</h3>
+              <p>Compare outputs for factuality, usefulness, uncertainty, hallucination, safety, and accountability.</p>
             </article>
-            <article class="usecase-card" data-usecase="governance">
-              <span>Governance</span>
-              <h3>Prepare safer adoption</h3>
-              <p>Review ethics, accountability, patient privacy, monitoring, and human oversight before introducing AI tools.</p>
+            <article class="usecase-card" data-usecase="ethics">
+              <span>Module 4</span>
+              <h3>Bias and explainability</h3>
+              <p>Fairness, bias sources, explainability limits, transparency, governance, and patient communication.</p>
             </article>
           </div>
 
@@ -261,35 +256,49 @@
           </div>
         </section>
 
+        <section class="module-pages-band" id="module-pages">
+          <div class="section-heading">
+            <p class="kicker">Learning pages</p>
+            <h2>Each GenAI topic opens as its own learning page, while everything remains inside this one Health-AI platform.</h2>
+          </div>
+
+          <div class="module-page-shell">
+            <div class="module-page-tabs" id="modulePageTabs" aria-label="Learning module pages"></div>
+            <article class="module-page-panel" id="modulePagePanel">
+              <div class="panel-header">
+                <span>Learning page</span>
+                <strong>Select a module</strong>
+              </div>
+              <p>Choose a module page to view the full learning content.</p>
+            </article>
+          </div>
+        </section>
+
         <section class="repository-band" id="repository">
           <div class="section-heading">
-            <p class="kicker">Lecture material repository</p>
-            <h2>Upload, organize, and share teaching materials for AI literacy in healthcare.</h2>
+            <p class="kicker">Health-AI learning modules</p>
+            <h2>Open structured GenAI learning modules with outcomes, activities, assessment, ethics focus, and teaching material upload.</h2>
           </div>
 
           <div class="repository-grid">
             <article class="upload-panel">
               <div class="panel-header">
                 <span>Instructor tools</span>
-                <strong>Add lecture material</strong>
+                <strong>Add curriculum material</strong>
               </div>
 
               <form id="resourceForm" class="resource-form">
                 <label for="resourceTitle">Material title</label>
-                <input id="resourceTitle" type="text" placeholder="Example: Bias in clinical datasets" required />
+                <input id="resourceTitle" type="text" placeholder="Example: Prompting for patient education drafts" required />
 
                 <div class="form-row">
                   <div>
                     <label for="resourceModule">Module</label>
                     <select id="resourceModule">
-                      <option>AI Fundamentals</option>
-                      <option>Machine Learning</option>
-                      <option>Deep Learning</option>
-                      <option>Clinical Data</option>
-                      <option>Model Evaluation</option>
-                      <option>Bias and Safety</option>
-                      <option>Ethical Use</option>
-                      <option>Clinical Deployment</option>
+                      <option value="1. Foundations">GenAI & LLMs: how they work</option>
+                      <option value="2. Prompting and healthcare use">GenAI prompting and healthcare use</option>
+                      <option value="3. Evaluation and comparison">GenAI evaluating and comparing models</option>
+                      <option value="4. Explainability and bias">GenAI explainability and algorithmic bias</option>
                     </select>
                   </div>
                   <div>
@@ -302,12 +311,16 @@
                       <option>Dataset</option>
                       <option>Video</option>
                       <option>Quiz</option>
+                      <option>AI visualisation tool</option>
+                      <option>Prompt worksheet</option>
+                      <option>Evaluation rubric</option>
+                      <option>Case discussion</option>
                     </select>
                   </div>
                 </div>
 
                 <label for="resourceDescription">Teaching note</label>
-                <textarea id="resourceDescription" placeholder="What should students learn from this material?" rows="4"></textarea>
+                <textarea id="resourceDescription" placeholder="What learning outcome should this material support?" rows="4"></textarea>
 
                 <label for="resourceFile">File</label>
                 <label class="file-drop" for="resourceFile"><strong>Choose data or lecture file</strong><span id="selectedFileName">No file selected</span></label>
@@ -321,25 +334,21 @@
               <div class="panel-header library-header">
                 <div>
                   <span>Student library</span>
-                  <strong>Course materials</strong>
+                  <strong>GenAI learning modules</strong>
                 </div>
                 <select id="repositoryFilter" aria-label="Filter materials">
-                  <option>All modules</option>
-                  <option>AI Fundamentals</option>
-                  <option>Machine Learning</option>
-                  <option>Deep Learning</option>
-                  <option>Clinical Data</option>
-                  <option>Model Evaluation</option>
-                  <option>Bias and Safety</option>
-                  <option>Ethical Use</option>
-                  <option>Clinical Deployment</option>
+                  <option>All learning modules</option>
+                  <option value="1. Foundations">GenAI & LLMs: how they work</option>
+                  <option value="2. Prompting and healthcare use">GenAI prompting and healthcare use</option>
+                  <option value="3. Evaluation and comparison">GenAI evaluating and comparing models</option>
+                  <option value="4. Explainability and bias">GenAI explainability and algorithmic bias</option>
                 </select>
               </div>
 
               <div class="repository-stats" aria-label="Repository statistics">
-                <div><strong id="resourceCount">0</strong><span>materials</span></div>
-                <div><strong>8</strong><span>modules</span></div>
-                <div><strong>6</strong><span>formats</span></div>
+                <div><strong id="resourceCount">0</strong><span>sessions</span></div>
+                <div><strong>4</strong><span>modules</span></div>
+                <div><strong>3</strong><span>activities each</span></div>
               </div>
 
               <div class="resource-list" id="resourceList"></div>
@@ -349,8 +358,8 @@
 
         <section class="browser-ai-band" id="browser-ai">
           <div class="section-heading">
-            <p class="kicker">Health-AI learning assistant</p>
-            <h2>Ask focused questions about AI concepts, model risk, ethics, and course materials.</h2>
+            <p class="kicker">Health-AI assistant</p>
+            <h2>Ask focused questions about GenAI, LLMs, prompting, evaluation, bias, ethics, and learning materials.</h2>
           </div>
 
           <div class="browser-ai-grid">
@@ -365,7 +374,7 @@
 
               <form id="browserAiForm" class="assistant-form">
                 <label for="browserAiPrompt">Question or learning topic</label>
-                <textarea id="browserAiPrompt" rows="5" placeholder="Example: Explain bias in clinical AI for medical students."></textarea>
+                <textarea id="browserAiPrompt" rows="5" placeholder="Example: How should doctors evaluate a GenAI answer?"></textarea>
                 <button class="wide-button" type="submit">Get guidance</button>
               </form>
             </article>
@@ -376,7 +385,7 @@
                 <strong>Learning guidance</strong>
               </div>
               <div class="bot-response" id="browserAiResponse">
-                <p>Ask a question to receive focused educational guidance and related course materials.</p>
+                <p>Ask a question to receive GenAI learning guidance and related module materials.</p>
               </div>
             </article>
           </div>
@@ -385,7 +394,7 @@
         <section class="users-band admin-only" id="users">
           <div class="section-heading">
             <p class="kicker">Registration database</p>
-            <h2>Registered platform users are visible only to the master admin.</h2>
+            <h2>Registered Health-AI platform users are visible only to the master admin.</h2>
           </div>
           <article class="users-panel">
             <div class="panel-header">
@@ -428,6 +437,6 @@
       </main>
     </div>
 
-    <script src="script.js?v=20260517"></script>
+    <script src="script.js?v=20260517-healthai-multipage"></script>
   </body>
 </html>
