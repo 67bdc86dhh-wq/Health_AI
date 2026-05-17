@@ -1999,3 +1999,46 @@ article,
   border-color: #087c78;
   background: #f7fffd;
 }
+
+
+/* Login/register scroll fix */
+.login-screen {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  align-items: start !important;
+  justify-items: center !important;
+  place-items: start center !important;
+  padding: 32px 18px !important;
+}
+
+.login-panel {
+  margin: 0 auto 32px !important;
+  max-height: none !important;
+}
+
+#authTitle {
+  margin: 0 0 14px !important;
+  color: var(--ink) !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  font-size: clamp(2.2rem, 5vw, 4rem) !important;
+  line-height: 1.04 !important;
+  letter-spacing: 0 !important;
+  filter: none !important;
+}
+
+@media (max-width: 620px) {
+  .login-screen {
+    padding: 14px !important;
+  }
+
+  .login-panel {
+    padding: 20px !important;
+    gap: 18px !important;
+  }
+
+  #authTitle {
+    font-size: 2.4rem !important;
+  }
+}
