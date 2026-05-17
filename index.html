@@ -7,7 +7,66 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="app-shell">
+    <section class="login-screen" id="loginScreen" aria-label="Health-AI sign in">
+      <div class="login-panel">
+        <div class="brand login-brand">
+          <div class="brand-mark" aria-hidden="true">H</div>
+          <div>
+            <strong>Health-AI</strong>
+            <span>Secure learning workspace</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="kicker">Platform access</p>
+          <h1 id="authTitle">Sign in</h1>
+          <p class="login-copy">Access AI literacy modules, lecture materials, doctor guidelines, and the Health-AI learning assistant.</p>
+        </div>
+
+        <div class="auth-tabs" role="tablist" aria-label="Authentication mode">
+          <button class="active" id="showLogin" type="button">Sign in</button>
+          <button id="showRegister" type="button">Register</button>
+        </div>
+
+        <form class="login-form" id="loginForm">
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" type="email" placeholder="name@example.com" required />
+
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" type="password" placeholder="Enter password" required />
+
+          <button class="wide-button" type="submit">Enter platform</button>
+          <p class="auth-message" id="loginMessage"></p>
+        </form>
+
+        <form class="login-form is-hidden" id="registerForm">
+          <label for="registerName">Full name</label>
+          <input id="registerName" type="text" placeholder="Enter full name" required />
+
+          <label for="registerRole">Role</label>
+          <select id="registerRole">
+            <option>Doctor</option>
+            <option>Instructor</option>
+            <option>Student</option>
+            <option>Project team</option>
+          </select>
+
+          <label for="registerOrganization">Organization</label>
+          <input id="registerOrganization" type="text" placeholder="Hospital, university, or team" />
+
+          <label for="registerEmail">Email</label>
+          <input id="registerEmail" type="email" placeholder="name@example.com" required />
+
+          <label for="registerPassword">Password</label>
+          <input id="registerPassword" type="password" placeholder="Create password" minlength="4" required />
+
+          <button class="wide-button" type="submit">Create account</button>
+          <p class="auth-message" id="registerMessage"></p>
+        </form>
+      </div>
+    </section>
+
+    <div class="app-shell is-locked" id="appShell">
       <aside class="sidebar" aria-label="Platform navigation">
         <div class="brand">
           <div class="brand-mark" aria-hidden="true">H</div>
@@ -25,7 +84,15 @@
           <a href="#use-cases">Use cases</a>
           <a href="#repository">Repository</a>
           <a href="#browser-ai">Browser AI</a>
+          <a href="#users" id="usersNavLink" class="admin-only">Users</a>
         </nav>
+
+        <div class="user-card" id="userCard">
+          <span class="eyebrow">Signed in</span>
+          <strong id="userName">Guest</strong>
+          <p id="userRole">Doctor</p>
+          <button type="button" id="logoutButton">Sign out</button>
+        </div>
 
         <div class="mentor-card">
           <span class="eyebrow">Today</span>
@@ -231,6 +298,7 @@
                       <option>Slide deck</option>
                       <option>Reading</option>
                       <option>Case study</option>
+                      <option>Data material</option>
                       <option>Dataset</option>
                       <option>Video</option>
                       <option>Quiz</option>
@@ -242,10 +310,10 @@
                 <textarea id="resourceDescription" placeholder="What should students learn from this material?" rows="4"></textarea>
 
                 <label for="resourceFile">File</label>
-                <label class="file-drop" for="resourceFile"><strong>Choose file</strong><span id="selectedFileName">No file selected</span></label>
-                <input id="resourceFile" class="hidden-file" type="file" />
+                <label class="file-drop" for="resourceFile"><strong>Choose data or lecture file</strong><span id="selectedFileName">No file selected</span></label>
+                <input id="resourceFile" class="hidden-file" type="file" accept=".pdf,.ppt,.pptx,.doc,.docx,.csv,.xlsx,.xls,.txt,.json,.mp4,.mov" />
 
-                <button class="wide-button" type="submit">Upload material</button>
+                <button class="wide-button" type="submit">Upload data/material</button>
               </form>
             </article>
 
@@ -312,6 +380,50 @@
               </div>
             </article>
           </div>
+        </section>
+
+        <section class="users-band admin-only" id="users">
+          <div class="section-heading">
+            <p class="kicker">Registration database</p>
+            <h2>Registered platform users are visible only to the master admin.</h2>
+          </div>
+          <article class="users-panel">
+            <div class="panel-header">
+              <div>
+                <span>Access records</span>
+                <strong>Platform database</strong>
+              </div>
+              <button type="button" id="clearUsersButton">Clear database</button>
+            </div>
+            <div class="database-tools" aria-label="Database tools">
+              <div class="database-stat">
+                <strong id="databaseUserCount">0</strong>
+                <span>registered users</span>
+              </div>
+              <div class="database-stat">
+                <strong id="databaseMaterialCount">0</strong>
+                <span>teaching materials</span>
+              </div>
+              <button type="button" id="exportDatabaseButton">Export database</button>
+              <label class="database-import" for="importDatabaseInput">Import database</label>
+              <input class="hidden-file" type="file" id="importDatabaseInput" accept=".json,application/json" />
+            </div>
+            <p class="database-status" id="databaseStatus">Database is stored securely in this browser for the current prototype.</p>
+            <div class="users-table-wrap">
+              <table class="users-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th>Organization</th>
+                    <th>Registered</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody"></tbody>
+              </table>
+            </div>
+          </article>
         </section>
       </main>
     </div>

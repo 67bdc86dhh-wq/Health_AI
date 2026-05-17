@@ -197,11 +197,90 @@ function saveResources() {
   window.localStorage.setItem(resourceKey, JSON.stringify(resources));
 }
 
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      resolve("#");
+      return;
+    }
+    const reader = new FileReader();
+    reader.addEventListener("load", () => resolve(reader.result));
+    reader.addEventListener("error", () => reject(reader.error));
+    reader.readAsDataURL(file);
+  });
+}
+
+function hasAttachedFile(resource) {
+  return Boolean(resource.url && resource.url !== "#");
+}
+
+function openResource(resource) {
+  if (!hasAttachedFile(resource)) {
+    window.alert("This sample material does not have an attached file yet. Upload your own file to open it here.");
+    return;
+  }
+
+  const openWindow = window.open(resource.url, "_blank", "noopener");
+  if (!openWindow) {
+    const link = document.createElement("a");
+    link.href = resource.url;
+    link.download = resource.file || "health-ai-material";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
+}
+
+function createResourceCard(resource) {
+  const originalIndex = resources.indexOf(resource);
+  const card = document.createElement("article");
+  const header = document.createElement("header");
+  const content = document.createElement("div");
+  const title = document.createElement("h3");
+  const meta = document.createElement("div");
+  const module = document.createElement("span");
+  const type = document.createElement("span");
+  const fileButton = document.createElement("button");
+  const description = document.createElement("p");
+  const actions = document.createElement("div");
+  const openButton = document.createElement("button");
+  const removeButton = document.createElement("button");
+
+  card.className = "resource-card";
+  meta.className = "resource-meta";
+  fileButton.className = "file-pill";
+  actions.className = "resource-actions";
+
+  title.textContent = resource.title;
+  module.textContent = resource.module;
+  type.textContent = resource.type;
+  fileButton.type = "button";
+  fileButton.dataset.openResourceIndex = String(originalIndex);
+  fileButton.textContent = resource.file || "No file attached";
+  fileButton.disabled = !hasAttachedFile(resource);
+  description.textContent = resource.description || "No teaching note added.";
+  openButton.type = "button";
+  openButton.dataset.openResourceIndex = String(originalIndex);
+  openButton.textContent = hasAttachedFile(resource) ? "Open attachment" : "No attachment";
+  openButton.disabled = !hasAttachedFile(resource);
+  removeButton.type = "button";
+  removeButton.dataset.resourceIndex = String(originalIndex);
+  removeButton.textContent = "Remove";
+
+  meta.append(module, type);
+  content.append(title, meta);
+  header.append(content, fileButton);
+  actions.append(openButton, removeButton);
+  card.append(header, description, actions);
+  return card;
+}
+
 function renderResources() {
   const filter = repositoryFilter.value;
   const visibleResources = filter === "All modules" ? resources : resources.filter((item) => item.module === filter);
   resourceList.innerHTML = "";
   resourceCount.textContent = resources.length;
+  renderDatabaseStats();
 
   if (!visibleResources.length) {
     const empty = document.createElement("div");
@@ -211,70 +290,66 @@ function renderResources() {
     return;
   }
 
-  visibleResources.forEach((resource) => {
-    const originalIndex = resources.indexOf(resource);
-    const card = document.createElement("article");
-    const header = document.createElement("header");
-    const content = document.createElement("div");
-    const title = document.createElement("h3");
-    const meta = document.createElement("div");
-    const module = document.createElement("span");
-    const type = document.createElement("span");
-    const fileLink = document.createElement("a");
-    const description = document.createElement("p");
-    const actions = document.createElement("div");
-    const openLink = document.createElement("a");
-    const removeButton = document.createElement("button");
+  const modules = [...new Set(visibleResources.map((resource) => resource.module))];
+  modules.forEach((moduleName) => {
+    const moduleSection = document.createElement("section");
+    const moduleHeader = document.createElement("div");
+    const moduleTitle = document.createElement("h3");
+    const moduleCount = document.createElement("span");
+    const moduleItems = document.createElement("div");
+    const moduleResources = visibleResources.filter((resource) => resource.module === moduleName);
 
-    card.className = "resource-card";
-    meta.className = "resource-meta";
-    fileLink.className = "file-pill";
-    actions.className = "resource-actions";
+    moduleSection.className = "resource-module";
+    moduleHeader.className = "resource-module-header";
+    moduleItems.className = "resource-module-items";
+    moduleTitle.textContent = moduleName;
+    moduleCount.textContent = moduleResources.length + (moduleResources.length === 1 ? " material" : " materials");
 
-    title.textContent = resource.title;
-    module.textContent = resource.module;
-    type.textContent = resource.type;
-    fileLink.textContent = resource.file || "Open material";
-    fileLink.href = resource.url || "#";
-    fileLink.target = "_blank";
-    fileLink.rel = "noopener";
-    description.textContent = resource.description || "No teaching note added.";
-    openLink.textContent = "Open material";
-    openLink.href = resource.url || "#";
-    openLink.target = "_blank";
-    openLink.rel = "noopener";
-    removeButton.type = "button";
-    removeButton.dataset.resourceIndex = String(originalIndex);
-    removeButton.textContent = "Remove";
-
-    meta.append(module, type);
-    content.append(title, meta);
-    header.append(content, fileLink);
-    actions.append(openLink, removeButton);
-    card.append(header, description, actions);
-    resourceList.appendChild(card);
+    moduleHeader.append(moduleTitle, moduleCount);
+    moduleResources.forEach((resource) => moduleItems.appendChild(createResourceCard(resource)));
+    moduleSection.append(moduleHeader, moduleItems);
+    resourceList.appendChild(moduleSection);
   });
 }
 
-resourceForm.addEventListener("submit", (event) => {
+resourceForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const fileInput = document.querySelector("#resourceFile");
-  const resource = {
-    title: document.querySelector("#resourceTitle").value.trim(),
-    module: document.querySelector("#resourceModule").value,
-    type: document.querySelector("#resourceType").value,
-    description: document.querySelector("#resourceDescription").value.trim(),
-    file: fileInput.files[0]?.name || "Uploaded material",
-    url: fileInput.files[0] ? URL.createObjectURL(fileInput.files[0]) : "#"
-  };
-  resources.unshift(resource);
-  saveResources();
-  renderResources();
-  resourceForm.reset();
-  selectedFileName.textContent = "No file selected";
+  const file = fileInput.files[0];
+  const submitButton = resourceForm.querySelector("button[type='submit']");
+  submitButton.textContent = "Uploading...";
+  submitButton.disabled = true;
+
+  try {
+    const resource = {
+      title: document.querySelector("#resourceTitle").value.trim(),
+      module: document.querySelector("#resourceModule").value,
+      type: document.querySelector("#resourceType").value,
+      description: document.querySelector("#resourceDescription").value.trim(),
+      file: file?.name || "Uploaded material",
+      url: await readFileAsDataUrl(file),
+      uploadedAt: new Date().toLocaleString()
+    };
+    resources.unshift(resource);
+    saveResources();
+    renderResources();
+    resourceForm.reset();
+    selectedFileName.textContent = "No file selected";
+  } catch {
+    selectedFileName.textContent = "Upload failed. Try a smaller file.";
+  } finally {
+    submitButton.textContent = "Upload data/material";
+    submitButton.disabled = false;
+  }
 });
 
 resourceList.addEventListener("click", (event) => {
+  const openButton = event.target.closest("button[data-open-resource-index]");
+  if (openButton) {
+    openResource(resources[Number(openButton.dataset.openResourceIndex)]);
+    return;
+  }
+
   const button = event.target.closest("button[data-resource-index]");
   if (!button) return;
   resources.splice(Number(button.dataset.resourceIndex), 1);
@@ -287,7 +362,6 @@ resourceFile.addEventListener("change", () => {
 });
 
 repositoryFilter.addEventListener("change", renderResources);
-renderResources();
 
 
 const workflowData = {
@@ -437,3 +511,270 @@ browserAiForm.addEventListener("submit", (event) => {
     browserAiResponse.appendChild(block);
   });
 });
+
+
+document.querySelector(".icon-button")?.addEventListener("click", () => {
+  document.querySelector("#builder")?.scrollIntoView({ behavior: "smooth" });
+});
+
+
+const loginScreen = document.querySelector("#loginScreen");
+const appShell = document.querySelector("#appShell");
+const loginForm = document.querySelector("#loginForm");
+const registerForm = document.querySelector("#registerForm");
+const showLoginButton = document.querySelector("#showLogin");
+const showRegisterButton = document.querySelector("#showRegister");
+const authTitle = document.querySelector("#authTitle");
+const loginEmail = document.querySelector("#loginEmail");
+const loginPassword = document.querySelector("#loginPassword");
+const registerName = document.querySelector("#registerName");
+const registerRole = document.querySelector("#registerRole");
+const registerOrganization = document.querySelector("#registerOrganization");
+const registerEmail = document.querySelector("#registerEmail");
+const registerPassword = document.querySelector("#registerPassword");
+const loginMessage = document.querySelector("#loginMessage");
+const registerMessage = document.querySelector("#registerMessage");
+const userName = document.querySelector("#userName");
+const userRole = document.querySelector("#userRole");
+const logoutButton = document.querySelector("#logoutButton");
+const usersTableBody = document.querySelector("#usersTableBody");
+const clearUsersButton = document.querySelector("#clearUsersButton");
+const exportDatabaseButton = document.querySelector("#exportDatabaseButton");
+const importDatabaseInput = document.querySelector("#importDatabaseInput");
+const databaseStatus = document.querySelector("#databaseStatus");
+const databaseUserCount = document.querySelector("#databaseUserCount");
+const databaseMaterialCount = document.querySelector("#databaseMaterialCount");
+const loginKey = "healthAiUser";
+const usersKey = "healthAiUsers";
+const masterAdminEmail = "admin@health-ai.local";
+
+function loadUsers() {
+  const saved = window.localStorage.getItem(usersKey);
+  if (!saved) return [];
+  try {
+    return JSON.parse(saved);
+  } catch {
+    return [];
+  }
+}
+
+function saveUsers(users) {
+  window.localStorage.setItem(usersKey, JSON.stringify(users));
+}
+
+function setDatabaseStatus(message, isError = false) {
+  if (!databaseStatus) return;
+  databaseStatus.textContent = message;
+  databaseStatus.classList.toggle("is-error", isError);
+}
+
+function renderDatabaseStats() {
+  const users = ensureMasterAdmin(loadUsers());
+  if (databaseUserCount) databaseUserCount.textContent = users.length;
+  if (databaseMaterialCount) databaseMaterialCount.textContent = resources.length;
+}
+
+function getDatabaseSnapshot() {
+  return {
+    platform: "Health-AI",
+    version: "1.0",
+    exportedAt: new Date().toISOString(),
+    users: ensureMasterAdmin(loadUsers()),
+    resources
+  };
+}
+
+function downloadDatabaseSnapshot() {
+  const snapshot = getDatabaseSnapshot();
+  const blob = new Blob([JSON.stringify(snapshot, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "health-ai-database.json";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+  setDatabaseStatus("Database exported. Keep the JSON file as your backup.");
+}
+
+function importDatabaseSnapshot(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    try {
+      const snapshot = JSON.parse(reader.result);
+      if (!Array.isArray(snapshot.users) || !Array.isArray(snapshot.resources)) {
+        throw new Error("Invalid database file");
+      }
+      saveUsers(ensureMasterAdmin(snapshot.users));
+      resources = snapshot.resources;
+      saveResources();
+      renderUsersTable();
+      renderResources();
+      setDatabaseStatus("Database imported successfully.");
+    } catch {
+      setDatabaseStatus("Import failed. Please choose a valid Health-AI database JSON file.", true);
+    } finally {
+      importDatabaseInput.value = "";
+    }
+  });
+  reader.addEventListener("error", () => {
+    setDatabaseStatus("Import failed. Please try the file again.", true);
+  });
+  reader.readAsText(file);
+}
+
+function isMasterAdmin(user) {
+  return user?.role === "Master admin" && user?.email?.toLowerCase() === masterAdminEmail;
+}
+
+function updateAdminAccess(user) {
+  document.querySelectorAll(".admin-only").forEach((element) => {
+    element.classList.toggle("is-hidden", !isMasterAdmin(user));
+  });
+}
+
+function ensureMasterAdmin(users) {
+  if (users.some((user) => user.email.toLowerCase() === masterAdminEmail)) return users;
+  return [
+    {
+      name: "Master Admin",
+      role: "Master admin",
+      organization: "Health-AI",
+      email: masterAdminEmail,
+      password: "admin123",
+      createdAt: new Date().toLocaleDateString()
+    },
+    ...users
+  ];
+}
+
+function renderUsersTable() {
+  const users = ensureMasterAdmin(loadUsers());
+  saveUsers(users);
+  renderDatabaseStats();
+  usersTableBody.innerHTML = "";
+  if (!users.length) {
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = 5;
+    cell.textContent = "No registered users yet.";
+    row.appendChild(cell);
+    usersTableBody.appendChild(row);
+    return;
+  }
+
+  users.forEach((user) => {
+    const row = document.createElement("tr");
+    [user.name, user.role, user.email, user.organization || "-", user.createdAt].forEach((value) => {
+      const cell = document.createElement("td");
+      cell.textContent = value;
+      row.appendChild(cell);
+    });
+    usersTableBody.appendChild(row);
+  });
+}
+
+function setAuthMode(mode) {
+  const isRegister = mode === "register";
+  loginForm.classList.toggle("is-hidden", isRegister);
+  registerForm.classList.toggle("is-hidden", !isRegister);
+  showLoginButton.classList.toggle("active", !isRegister);
+  showRegisterButton.classList.toggle("active", isRegister);
+  authTitle.textContent = isRegister ? "Create account" : "Sign in";
+  loginMessage.textContent = "";
+  registerMessage.textContent = "";
+}
+
+function showApp(user) {
+  userName.textContent = user.name;
+  userRole.textContent = user.role + " • " + user.email;
+  loginScreen.classList.add("is-hidden");
+  appShell.classList.remove("is-locked");
+  updateAdminAccess(user);
+  renderUsersTable();
+}
+
+function showLogin() {
+  loginScreen.classList.remove("is-hidden");
+  appShell.classList.add("is-locked");
+  setAuthMode("login");
+  updateAdminAccess(null);
+}
+
+const savedUser = window.localStorage.getItem(loginKey);
+if (savedUser) {
+  try {
+    showApp(JSON.parse(savedUser));
+  } catch {
+    showLogin();
+  }
+} else {
+  showLogin();
+}
+
+showLoginButton.addEventListener("click", () => setAuthMode("login"));
+showRegisterButton.addEventListener("click", () => setAuthMode("register"));
+
+registerForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const users = ensureMasterAdmin(loadUsers());
+  const email = registerEmail.value.trim().toLowerCase();
+  if (users.some((user) => user.email.toLowerCase() === email)) {
+    registerMessage.textContent = "This email is already registered.";
+    return;
+  }
+
+  const user = {
+    name: registerName.value.trim(),
+    role: registerRole.value,
+    organization: registerOrganization.value.trim(),
+    email,
+    password: registerPassword.value,
+    createdAt: new Date().toLocaleDateString()
+  };
+  users.unshift(user);
+  saveUsers(users);
+  window.localStorage.setItem(loginKey, JSON.stringify(user));
+  registerForm.reset();
+  showApp(user);
+});
+
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const email = loginEmail.value.trim().toLowerCase();
+  const password = loginPassword.value;
+  const user = ensureMasterAdmin(loadUsers()).find((item) => item.email.toLowerCase() === email && item.password === password);
+  if (!user) {
+    loginMessage.textContent = "Account not found. Please register first or check your password.";
+    return;
+  }
+  window.localStorage.setItem(loginKey, JSON.stringify(user));
+  showApp(user);
+});
+
+logoutButton.addEventListener("click", () => {
+  window.localStorage.removeItem(loginKey);
+  loginForm.reset();
+  showLogin();
+});
+
+clearUsersButton.addEventListener("click", () => {
+  saveUsers(ensureMasterAdmin([]));
+  resources = [];
+  saveResources();
+  window.localStorage.removeItem(loginKey);
+  renderUsersTable();
+  renderResources();
+  setDatabaseStatus("Database cleared. Master admin account was kept.");
+  showLogin();
+});
+
+exportDatabaseButton?.addEventListener("click", downloadDatabaseSnapshot);
+
+importDatabaseInput?.addEventListener("change", () => {
+  importDatabaseSnapshot(importDatabaseInput.files[0]);
+});
+
+renderResources();
